@@ -2,9 +2,9 @@ import React from "react";
 import {
     AppBar,
     Avatar,
-    Badge, Box,
+    Badge,
     Button,
-    CardHeader, CardMedia,
+    CardHeader,
     IconButton,
     Theme,
     Toolbar
@@ -15,7 +15,6 @@ import LightLabel from "../content/lightLabel";
 import footballLogo from '../../static/football.png'
 import pitchLogo from '../../static/pitch.png'
 import { FontVariant } from "../../enums/fontVariant";
-import {blue} from "@mui/material/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

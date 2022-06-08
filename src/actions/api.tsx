@@ -17,6 +17,48 @@ export function fetchGoalScoringData(): any {
             name: "Luka",
             surname: "Boric",
             goals: 0
+        },
+        {
+            id: 3,
+            name: "Zvonimir",
+            surname: "Šapina",
+            goals: 0
+        },
+        {
+            id: 3,
+            name: "Fran",
+            surname: "Svarc",
+            goals: 0
+        },
+        {
+            id: 3,
+            name: "Dejan",
+            surname: "Dakic",
+            goals: 0
+        },
+        {
+            id: 3,
+            name: "Dejan",
+            surname: "Dakic",
+            goals: 0
+        },
+        {
+            id: 3,
+            name: "Dejan",
+            surname: "Dakic",
+            goals: 0
+        },
+        {
+            id: 3,
+            name: "Dejan",
+            surname: "Dakic",
+            goals: 0
+        },
+        {
+            id: 3,
+            name: "Dejan",
+            surname: "Dakic",
+            goals: 0
         }
     ]
 }

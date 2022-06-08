@@ -6,10 +6,11 @@ import { FontVariant } from "../../enums/fontVariant";
 const useStyles = makeStyles(() =>
     createStyles({
         font: {
-            color: "black",
-            fontSize: 25,
-            textAlign: "left"
-        },
+            color: "white",
+            textAlign: "left",
+            fontFamily: "Arial",
+            border: "52px"
+        }
     })
 );
 
@@ -18,15 +19,11 @@ type Props = {
     children?: React.ReactNode;
 }
 
-const LightLabel: React.FC<Props> = (props: Props) => {
+const LightLabel: React.FC<Props> = (props) => {
     const classes = useStyles();
 
     return (
-        <Typography
-            className={classes.font}
-            variant={props.variant}
-            noWrap
-        >
+        <Typography className={classes.font} variant={props.variant} noWrap>
             {props.children}
         </Typography>
     );

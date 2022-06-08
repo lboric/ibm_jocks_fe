@@ -2,19 +2,20 @@ import React from "react";
 import {
     AppBar,
     Avatar,
-    Badge,
+    Badge, Box,
     Button,
-    CardHeader,
+    CardHeader, CardMedia,
     IconButton,
-    Toolbar,
-    Theme
+    Theme,
+    Toolbar
 } from "@mui/material";
 import { Notifications } from "@mui/icons-material";
 import { createStyles, makeStyles } from "@mui/styles";
-
 import LightLabel from "../content/lightLabel";
-
 import footballLogo from '../../static/football.png'
+import pitchLogo from '../../static/pitch.png'
+import { FontVariant } from "../../enums/fontVariant";
+import {blue} from "@mui/material/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,20 +37,11 @@ const TopNav: React.FC<{}> = () => {
             <Toolbar disableGutters>
                 <Button>
                     <CardHeader
-                        avatar={
-                            <Avatar color="primary" src={footballLogo} />
-                        }
-                        title={
-                            <LightLabel variant={"h4"}>
-                                IBM iX Zagreb
-                            </LightLabel>
-                        }
-                        subheader={
-                            <LightLabel variant={"h6"}>
-                                Football
-                            </LightLabel>
-                        }
+                        avatar={<Avatar sx={{ height: '50px', width: '50px', backgroundColor: 'blue' }} color="primary" src={footballLogo} />}
+                        title={<LightLabel variant={FontVariant.H5}>___IBM iX Zagreb</LightLabel>}
+                        subheader={<LightLabel variant={FontVariant.H6}>Football__________</LightLabel>}
                     />
+                    <Avatar variant="rounded" sx={{ height: '70px', width: '80px'}} color="primary" src={pitchLogo} />
                 </Button>
                 <div className={classes.grow} />
                 <div className={classes.notifications}>

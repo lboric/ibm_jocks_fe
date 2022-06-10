@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, { FC } from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import PlayerPortrait from "../components/content/playerPortrait";
 import { GoalScoringData } from "../models/goalScoringData";
@@ -32,9 +32,9 @@ const PlayersPage: FC<Props> = (props) => {
                     Players
                 </DarkLabel>
             </div>
-            <Grid xs={12} container spacing={5} direction="row" className={classes.page}>
+            <Grid xs={12} container spacing={8} direction="row" className={classes.page}>
                 {goalScoringData.map((data) =>
-                    <Grid item justifyContent="center">
+                    <Grid item>
                         <PlayerPortrait name={data.name} surname={data.surname} />
                     </Grid>
                 )}

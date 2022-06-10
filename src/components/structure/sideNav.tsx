@@ -7,13 +7,13 @@ import {
 } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
-import { ArrowForwardIos, TableRows, PeopleOutline} from "@mui/icons-material";
+import {ArrowForwardIos, TableRows, PeopleOutline, InfoOutlined} from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) =>
     createStyles({
         menu: {
             width: "100%",
-            height: "125vh",
+            height: '100vw',
             backgroundColor: "#1976d2",
             color: "white",
             position: "relative",
@@ -43,6 +43,12 @@ const SideNav: React.FC<{}> = () => {
             <ListItem button component={Link} to="/players">
                 <PeopleOutline className={classes.menuIcon}/>
                 <ListItemText primary="Players" />
+                <ArrowForwardIos />
+            </ListItem>
+            <Divider />
+            <ListItem button component={Link} to="/info">
+                <InfoOutlined className={classes.menuIcon}/>
+                <ListItemText primary="Info" />
                 <ArrowForwardIos />
             </ListItem>
             <Divider />

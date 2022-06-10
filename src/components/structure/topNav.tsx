@@ -6,17 +6,16 @@ import {
     Button,
     CardHeader,
     IconButton,
-    Theme,
     Toolbar
 } from "@mui/material";
 import { Notifications } from "@mui/icons-material";
 import { createStyles, makeStyles } from "@mui/styles";
 import LightLabel from "../content/lightLabel";
 import footballLogo from '../../static/football.png'
-import pitchLogo from '../../static/pitch.png'
+import goalLogo from '../../static/goal.png'
 import { FontVariant } from "../../enums/fontVariant";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
         grow: {
             flexGrow: 1,
@@ -28,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-const TopNav: React.FC<{}> = () => {
+const TopNav = () => {
     const classes = useStyles();
 
     return(
@@ -38,9 +37,9 @@ const TopNav: React.FC<{}> = () => {
                     <CardHeader
                         avatar={<Avatar sx={{ height: '50px', width: '50px', backgroundColor: 'blue' }} color="primary" src={footballLogo} />}
                         title={<LightLabel variant={FontVariant.H5}>___IBM iX Zagreb</LightLabel>}
-                        subheader={<LightLabel variant={FontVariant.H6}>Football__________</LightLabel>}
+                        subheader={<LightLabel variant={FontVariant.H6}>Football________</LightLabel>}
                     />
-                    <Avatar variant="rounded" sx={{ height: '70px', width: '80px'}} color="primary" src={pitchLogo} />
+                    <Avatar variant="rounded" sx={{ height: '70px', width: '80px'}} color="primary" src={goalLogo} />
                 </Button>
                 <div className={classes.grow} />
                 <div className={classes.notifications}>

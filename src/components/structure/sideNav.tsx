@@ -7,7 +7,12 @@ import {
 } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
-import {ArrowForwardIos, TableRows, PeopleOutline, InfoOutlined} from "@mui/icons-material";
+import {
+    ArrowForwardIos,
+    TableRows,
+    PeopleOutline,
+    SportsSoccerOutlined
+} from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -34,9 +39,9 @@ const SideNav: React.FC<{}> = () => {
     return (
         <List component="nav" aria-labelledby="nested-list-subheader" className={classes.menu}>
             <Divider />
-            <ListItem button component={Link} to="/">
-                <TableRows className={classes.menuIcon}/>
-                <ListItemText primary="Leaderboard" />
+            <ListItem button component={Link} to="/squads">
+                <SportsSoccerOutlined className={classes.menuIcon}/>
+                <ListItemText primary="Squad" />
                 <ArrowForwardIos />
             </ListItem>
             <Divider />
@@ -46,9 +51,9 @@ const SideNav: React.FC<{}> = () => {
                 <ArrowForwardIos />
             </ListItem>
             <Divider />
-            <ListItem button component={Link} to="/info">
-                <InfoOutlined className={classes.menuIcon}/>
-                <ListItemText primary="Info" />
+            <ListItem button component={Link} to="/">
+                <TableRows className={classes.menuIcon}/>
+                <ListItemText primary="Leaderboard" />
                 <ArrowForwardIos />
             </ListItem>
             <Divider />

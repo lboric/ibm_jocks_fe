@@ -1,9 +1,17 @@
 import React from "react";
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {GoalScoringData} from "../../models/goalScoringData";
-import {isNotEmpty} from "../../utils/arrayUtils";
-import DarkLabel from "./darkLabel";
-import {FontVariant} from "../../enums/fontVariant";
+import {
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow
+} from "@mui/material";
+import { GoalScoringData } from "../../models/goalScoringData";
+import { isNotEmpty } from "../../utils/arrayUtils";
+import DarkLabel from "./labels/darkLabel";
+import { FontVariant } from "../../enums/fontVariant";
 
 type Props = {
     goalScoringData: GoalScoringData[]

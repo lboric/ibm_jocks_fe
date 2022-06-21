@@ -1,19 +1,14 @@
-import React, { useState } from "react";
-import Board from "../components/content/pitch";
+import React, { FC } from "react";
 
-export const ItemTypes = {
-    PLAYER: 'player'
+type Props = {
 }
 
-export type PlayerPosition = {
-    playerX: number;
-    playerY: number;
+const InfoPage: FC<Props> = (props) => {
+    return (
+        <>
+        </>
+    );
 }
 
-const InfoPage = () => {
-    const [playerPosition, setPlayerPosition] = useState({ playerX: 0, playerY: 0} as PlayerPosition);
-
-    return <Board playerPosition={playerPosition} movePlayer={setPlayerPosition} />;
-}
 
 export default InfoPage;

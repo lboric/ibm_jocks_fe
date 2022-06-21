@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
-import { FontVariant } from "../../enums/fontVariant";
+import { FontVariant } from "../../../enums/fontVariant";
 
 const useStyles = makeStyles(() =>
     createStyles({

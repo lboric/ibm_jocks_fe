@@ -9,7 +9,8 @@ import TopNav from "./components/structure/topNav";
 import SideNav from "./components/structure/sideNav";
 import { fetchGoalScoringData } from "./actions/api";
 import { createTheme } from "@mui/material/styles";
-import InfoPage from "./pages/infoPage";
+import SquadPage from "./pages/squadPage";
+import { useAppSelector } from "./redux/redux-hooks";
 
 const theme = createTheme({
     components: {
@@ -41,12 +42,16 @@ const useStyles = makeStyles(() =>
         divider: {
             marginTop: "50px",
             marginBottom: "50px"
+        },
+        innerGrid: {
+            textAlign: "-webkit-center"
         }
     })
 );
 
 function App() {
     const classes = useStyles();
+    const playerPositions = useAppSelector(state => state.playerPositions).playerPositions;
     const [goalScoringData, setGoalScoringData] = useState([]);
 
     // api call
@@ -65,13 +70,13 @@ function App() {
                     <SideNav />
                 </Grid>
                 <Grid item xs={10} spacing={10} direction="column" alignItems="center"
-                      justifyContent="center" className={classes.mainContent}>
-                    <Grid item>
+                      justifyContent="center" className={classes.mainContent} >
+                    <Grid item className={classes.innerGrid}>
                         <div className={classes.divider}><Divider /></div>
                         <Routes>
                             <Route path="/" element={<TablePage goalScoringData={goalScoringData} />} />
                             <Route path="/players" element={<PlayersPage goalScoringData={goalScoringData} />} />
-                            <Route path="/info" element={<InfoPage />} />
+                            <Route path="/squads" element={<SquadPage  playerPositions={playerPositions} />} />
                         </Routes>
                     </Grid>
                 </Grid>

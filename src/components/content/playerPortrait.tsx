@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Avatar, Card } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import { FontVariant } from "../../enums/fontVariant";
-import DarkLabel from "./darkLabel";
+import DarkLabel from "./labels/darkLabel";
 
 const useStyles = makeStyles(() =>
     createStyles({

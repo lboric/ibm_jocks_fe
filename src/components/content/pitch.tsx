@@ -2,23 +2,24 @@ import React, { FC } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import Player from "./player";
-import BoardSquare from '../boardSquare';
-import { PlayerPosition } from "../../pages/infoPage";
-import image from "./pitch.png"
-
-
+import BoardSquare from '../structure/boardSquare';
+import { PlayerPosition } from "../../models/playerPositionData";
 
 type Props = {
-    playerPosition: PlayerPosition;
-    movePlayer: (position: PlayerPosition) => void;
+    playerPositions: PlayerPosition[];
+    movePlayer: (x: number, y: number, index: number) => void;
 }
 
-const Board: FC<Props> = (props) => {
-    const { playerPosition, movePlayer } = props;
+const Pitch: FC<Props> = (props) => {
+    const { playerPositions, movePlayer } = props;
     const squares = []
 
     for (let i = 0; i < 64; i++) {
-        squares.push(renderSquare(i, playerPosition));
+        const x = i % 8;
+        const y = Math.floor(i / 8);
+        const hasPlayer = checkIfSquareHasPlayerOnIt(x, y, playerPositions);
+
+        squares.push(renderSquare(x, y, hasPlayer));
     }
 
     return (
@@ -28,11 +29,12 @@ const Board: FC<Props> = (props) => {
                     borderStyle: 'solid',
                     borderColor: 'white',
                     borderWidth: '5px',
-                    width: '1000px',
-                    height: '600px',
+                    width: '90%',
+                    height: '680px',
                     display: 'flex',
                     flexWrap: 'wrap',
-                    backgroundImage: './../static/pitch.png'
+                    backgroundImage: './../static/pitch.png',
+                    left: '10000px'
                 }}
             >
                 {squares}
@@ -40,30 +42,33 @@ const Board: FC<Props> = (props) => {
         </DndProvider>
     )
 
-    function renderSquare(i: number, playerPosition: PlayerPosition) {
-        const x = i % 8;
-        const y = Math.floor(i / 8);
-        const playerX = (playerPosition ?? {playerX: -1, playerY: -1} as PlayerPosition).playerX;
-        const playerY = (playerPosition ?? {playerX: -1, playerY: -1} as PlayerPosition).playerY;
-        const hasPlayer = x === playerX && y === playerY;
+    function renderSquare(x: number, y: number, hasPlayer: boolean) {
+        const renderPiece = (x: number, y: number, hasPlayer: boolean) => {
+            if (hasPlayer) {
+                const playerIndex = findPlayerIndex(x, y, playerPositions);
 
-        const renderPiece = (x: number, y: number, playerX?: number, playerY?: number) => {
-            if (x === playerX && y === playerY) {
-                return <Player />
+                return <Player playerIndex={playerIndex} />
             } else {
-                //TODO fix this
-                return <p>.</p>
+                return <p style={{display: 'hidden'}} />
             }
-        }
+        };
 
         return (
-            <div key={i} style={{ width: '12.5%', height: '12.5%'}}>
+            <div style={{ width: '12.5%', height: '12.5%'}}>
                 <BoardSquare x={x} y={y} hasPlayer={hasPlayer} movePlayer={movePlayer}>
-                    {renderPiece(x, y, playerX, playerY)}
+                    {renderPiece(x, y, hasPlayer)}
                 </BoardSquare>
             </div>
         )
     }
+
+    function checkIfSquareHasPlayerOnIt(x: number, y: number, playerPositions: PlayerPosition[]): boolean {
+        return (playerPositions ?? []).some(position => position.playerX === x && position.playerY === y);
+    }
+
+    function findPlayerIndex(x: number, y: number, playerPositions: PlayerPosition[]): number {
+        return (playerPositions ?? []).findIndex(position => position.playerX === x && position.playerY === y);
+    }
 }
 
-export default Board;
+export default Pitch;

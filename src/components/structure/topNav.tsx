@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Notifications } from "@mui/icons-material";
 import { createStyles, makeStyles } from "@mui/styles";
-import LightLabel from "../content/lightLabel";
+import LightLabel from "../content/labels/lightLabel";
 import footballLogo from '../../static/football.png'
 import goalLogo from '../../static/goal.png'
 import { FontVariant } from "../../enums/fontVariant";

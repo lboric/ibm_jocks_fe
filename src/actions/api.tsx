@@ -1,3 +1,13 @@
+export function postSlackMessage() {
+    /*fetch('https://hooks.slack.com/services/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', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'payload={"channel": "#loc_zg_football", "username": "Miki Rapaić", "text": "u moje doba jedina masaza je bila rakijom na ranu"}'
+    });*/
+}
+
 export function fetchGoalScoringData(): any {
     return [
         {

@@ -37,7 +37,7 @@ const Player: FC<Props> = (props) => {
         <Avatar
             className={classes.player}
             ref={drag}
-            style={{ opacity: isDragging ? 0.5 : 1}}>
+            style={ playerIndex <= 4 ? {backgroundColor: 'black', opacity: isDragging ? 0.5 : 1} : { opacity: isDragging ? 0.5 : 1}}>
             S
         </Avatar>
     )

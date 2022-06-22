@@ -3,6 +3,7 @@ import { useDrag } from "react-dnd";
 import { Avatar } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import { ItemTypes } from "../../models/playerData";
+import {PlayerPosition} from "../../models/playerPositionData";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -19,15 +20,16 @@ const useStyles = makeStyles(() =>
 
 export type Props = {
     playerIndex: number;
+    playerPosition: PlayerPosition;
 }
 
 const Player: FC<Props> = (props) => {
     const classes = useStyles();
-    const { playerIndex } = props;
+    const { playerIndex, playerPosition } = props;
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: ItemTypes.PLAYER,
-        item: { playerIndex },
+        item: playerPosition,
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         })
@@ -38,7 +40,7 @@ const Player: FC<Props> = (props) => {
             className={classes.player}
             ref={drag}
             style={ playerIndex <= 4 ? {backgroundColor: 'black', opacity: isDragging ? 0.5 : 1} : { opacity: isDragging ? 0.5 : 1}}>
-            S
+            {playerIndex}
         </Avatar>
     )
 }

@@ -8,7 +8,6 @@ import { FontVariant } from "../enums/fontVariant";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Button } from "@mui/material";
 import { postSlackMessage } from "../actions/api";
-import { sortPlayerPositionsByX } from "../utils/playerPositionUtil";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -25,7 +24,6 @@ type Props = {
 const SquadPage: FC<Props> = (props) => {
     const classes = useStyles();
     const { playerPositions } = props;
-    const playerPositionsSorted = sortPlayerPositionsByX(playerPositions);
     const dispatch = useAppDispatch();
     
     return (
@@ -37,12 +35,12 @@ const SquadPage: FC<Props> = (props) => {
                 <Button onClick={randomizePlayerPositions} variant="contained">Randomize</Button>
                 <Button onClick={postSlackMessage} variant="contained">Send Slack Message</Button>
             </div>
-            <Pitch playerPositions={playerPositionsSorted} movePlayer={handleMovePlayer} />
+            <Pitch playerPositions={playerPositions} movePlayer={handleMovePlayer} />
         </>
     );
 
-    function handleMovePlayer(x: number, y: number, index: number) {
-        dispatch(playerPositionsActions.setPlayerPosition({playerIndex: index, x: x, y: y}));
+    function handleMovePlayer(x: number, y: number, currentPlayerPosition: PlayerPosition) {
+        dispatch(playerPositionsActions.setPlayerPosition({x: x, y: y, playerX: currentPlayerPosition.playerX, playerY: currentPlayerPosition.playerY}));
     }
 
     function randomizePlayerPositions() {

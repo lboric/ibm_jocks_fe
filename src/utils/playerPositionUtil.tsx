@@ -30,3 +30,7 @@ export function checkIfRightHalfOfTheFiledHasBeenFilled(playerPositions: PlayerP
 export function sortPlayerPositionsByX(playerPositions: PlayerPosition[]): PlayerPosition[] {
     return [...playerPositions].sort((position1, position2) => position1.playerX - position2.playerX);
 }
+
+export function findPlayerIndex(x: number, y: number, playerPositions: PlayerPosition[]): number {
+    return (playerPositions ?? []).findIndex(position => position.playerX === x && position.playerY === y);
+}

@@ -4,7 +4,8 @@ import {
     checkIfIsForbiddenPosition,
     checkIfPlayerIsAlreadyOnPosition,
     checkIfRightHalfOfTheFiledHasBeenFilled,
-    checkIfLeftHalfOfTheFiledHasBeenFilled
+    checkIfLeftHalfOfTheFiledHasBeenFilled,
+    findPlayerIndex, sortPlayerPositionsByX
 } from "../utils/playerPositionUtil";
 
 type PlayerPositionsState = {
@@ -12,7 +13,8 @@ type PlayerPositionsState = {
 };
 
 type PlayerPositionActionPayload = {
-    playerIndex: number;
+    playerX: number;
+    playerY: number;
     x: number;
     y: number;
 }
@@ -39,19 +41,22 @@ const playerPositionsSlice = createSlice({
         setPlayerPosition(state, action: PayloadAction<PlayerPositionActionPayload>) {
             const x = action.payload.x;
             const y = action.payload.y;
+            const playerX = action.payload.playerX;
+            const playerY = action.payload.playerY;
             const playerPositionsCopied = [...state.playerPositions];
-
-
             const checkHasPlayer = playerPositionsCopied.some((position) => position.playerX === x && position.playerY === y);
 
+
             if (!checkHasPlayer && !checkIfIsForbiddenPosition(x, y)) {
-                playerPositionsCopied[action.payload.playerIndex].playerX = action.payload.x;
-                playerPositionsCopied[action.payload.playerIndex].playerY = action.payload.y;
+                const playerIndex = findPlayerIndex(playerX, playerY, state.playerPositions);
+                playerPositionsCopied[playerIndex].playerX = action.payload.x;
+                playerPositionsCopied[playerIndex].playerY = action.payload.y;
             }
 
             state.playerPositions = playerPositionsCopied;
         },
         randomizePlayerPositions(state) {
+            state.playerPositions = [];
             const playerPositionsRandom = [];
 
             while (playerPositionsRandom.length <= 9) {
@@ -67,7 +72,7 @@ const playerPositionsSlice = createSlice({
                 }
             }
 
-            state.playerPositions = playerPositionsRandom;
+            state.playerPositions = sortPlayerPositionsByX([...playerPositionsRandom]);
         }
     }
 });

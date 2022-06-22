@@ -4,7 +4,8 @@ import Square from "./square";
 import { useDrop } from "react-dnd";
 import { createStyles, makeStyles } from "@mui/styles";
 import { checkIfIsForbiddenPosition } from "../../utils/playerPositionUtil";
-import { ItemTypes, PlayerData } from "../../models/playerData";
+import { ItemTypes } from "../../models/playerData";
+import { PlayerPosition } from "../../models/playerPositionData";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -44,7 +45,7 @@ type Props = {
     y: number;
     hasPlayer: boolean;
     children: React.ReactNode;
-    movePlayer: (x: number, y: number, index: number) => void;
+    movePlayer: (x: number, y: number, currentPlayerPosition: PlayerPosition) => void;
 }
 
 const BoardSquare: FC<Props> = (props) => {
@@ -53,7 +54,7 @@ const BoardSquare: FC<Props> = (props) => {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: ItemTypes.PLAYER,
         canDrop: () => true,
-        drop: (player) => movePlayer(x, y, (player as PlayerData).playerIndex),
+        drop: (currentPlayerPosition) => handleMovePlayer(x, y, (currentPlayerPosition as PlayerPosition)),
         collect: monitor => ({
             isOver: monitor.isOver()
         })
@@ -75,6 +76,10 @@ const BoardSquare: FC<Props> = (props) => {
             {isOver && checkIfIsForbiddenPosition(x, y) && <div className={classes.undroppable} />}
         </div>
     )
+
+    function handleMovePlayer(x: number, y: number, currentPlayerPosition: PlayerPosition) {
+        movePlayer(x, y, currentPlayerPosition);
+    }
 
     function determineSquareCss(x: number, y: number): string {
         if (x !== 0 && x % 4 === 0) {

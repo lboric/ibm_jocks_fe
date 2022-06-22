@@ -4,10 +4,11 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import Player from "./player";
 import BoardSquare from './boardSquare';
 import { PlayerPosition } from "../../models/playerPositionData";
+import { findPlayerIndex } from "../../utils/playerPositionUtil";
 
 type Props = {
     playerPositions: PlayerPosition[];
-    movePlayer: (x: number, y: number, index: number) => void;
+    movePlayer: (x: number, y: number, currentPlayerPosition: PlayerPosition) => void;
 }
 
 const Pitch: FC<Props> = (props) => {
@@ -47,7 +48,7 @@ const Pitch: FC<Props> = (props) => {
             if (hasPlayer) {
                 const playerIndex = findPlayerIndex(x, y, playerPositions);
 
-                return <Player playerIndex={playerIndex} />
+                return <Player playerPosition={{playerX: x, playerY: y} as PlayerPosition} playerIndex={playerIndex} />
             } else {
                 return <p style={{display: 'hidden'}} />
             }
@@ -64,10 +65,6 @@ const Pitch: FC<Props> = (props) => {
 
     function checkIfSquareHasPlayerOnIt(x: number, y: number, playerPositions: PlayerPosition[]): boolean {
         return (playerPositions ?? []).some(position => position.playerX === x && position.playerY === y);
-    }
-
-    function findPlayerIndex(x: number, y: number, playerPositions: PlayerPosition[]): number {
-        return (playerPositions ?? []).findIndex(position => position.playerX === x && position.playerY === y);
     }
 }
 

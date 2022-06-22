@@ -15,7 +15,6 @@ const useStyles = makeStyles(() =>
             backgroundColor: 'green',
             borderStyle: 'solid',
             borderColor: 'white',
-
         },
         droppable: {
             position: 'absolute',

@@ -9,9 +9,10 @@ const useStyles = makeStyles(() =>
         player: {
             fontWeight: 'bold',
             cursor: 'move',
-            width: '60px',
-            height: '55px',
-            left: '48.5px'
+            width: '60px!important',
+            height: '60px!important',
+            bottom: '7px',
+            left: '15px'
         }
     })
 );
@@ -33,7 +34,7 @@ const Player: FC<Props> = (props) => {
     }))
 
     return (
-        <Avatar variant="rounded"
+        <Avatar
             className={classes.player}
             ref={drag}
             style={{ opacity: isDragging ? 0.5 : 1}}>

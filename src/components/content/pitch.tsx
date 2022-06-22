@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import Player from "./player";
-import BoardSquare from '../structure/boardSquare';
+import BoardSquare from './boardSquare';
 import { PlayerPosition } from "../../models/playerPositionData";
 
 type Props = {

@@ -42,7 +42,7 @@ const Pitch: FC<Props> = (props) => {
         </DndProvider>
     )
 
-    function renderSquare(x: number, y: number, hasPlayer: boolean) {
+    function renderSquare(x: number, y: number, hasPlayer: boolean): React.ReactNode {
         const renderPiece = (x: number, y: number, hasPlayer: boolean) => {
             if (hasPlayer) {
                 const playerIndex = findPlayerIndex(x, y, playerPositions);

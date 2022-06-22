@@ -1,5 +1,7 @@
+export const ItemTypes = {
+    PLAYER: 'player'
+}
+
 export type PlayerData = {
-    id: number,
-    name: string,
-    surname: string
+    playerIndex: number;
 }

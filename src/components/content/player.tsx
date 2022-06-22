@@ -1,8 +1,8 @@
 import React, {FC} from 'react'
 import { useDrag } from "react-dnd";
 import { Avatar } from "@mui/material";
-import { ItemTypes } from "../../pages/squadPage";
 import { createStyles, makeStyles } from "@mui/styles";
+import { ItemTypes } from "../../models/playerData";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -16,11 +16,11 @@ const useStyles = makeStyles(() =>
     })
 );
 
-export type PlayerProps = {
+export type Props = {
     playerIndex: number;
 }
 
-const Player: FC<PlayerProps> = (props) => {
+const Player: FC<Props> = (props) => {
     const classes = useStyles();
     const { playerIndex } = props;
 

@@ -2,10 +2,9 @@ import { FC } from "react"
 import React from "react";
 import Square from "./square";
 import { useDrop } from "react-dnd";
-import { ItemTypes } from "../../pages/squadPage";
 import { createStyles, makeStyles } from "@mui/styles";
-import { PlayerProps } from "../content/player";
-
+import { checkIfIsForbiddenPosition } from "../../utils/playerPositionUtil";
+import { ItemTypes, PlayerData } from "../../models/playerData";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -52,20 +51,14 @@ type Props = {
 const BoardSquare: FC<Props> = (props) => {
     const classes = useStyles();
     const { children, x, y, hasPlayer, movePlayer } = props;
-    console.log(hasPlayer, x, y);
-
     const [{ isOver }, drop] = useDrop(() => ({
         accept: ItemTypes.PLAYER,
         canDrop: () => true,
-        drop: (player) => handleDrop(player, x, y),
+        drop: (player) => movePlayer(x, y, (player as PlayerData).playerIndex),
         collect: monitor => ({
             isOver: monitor.isOver()
         })
     }), [x, y])
-
-    const handleDrop = (player: any, x: number, y: number) => {
-        movePlayer(x, y, (player as PlayerProps).playerIndex);
-    }
 
     return (
         <div
@@ -80,16 +73,7 @@ const BoardSquare: FC<Props> = (props) => {
             <Square>{children}</Square>
             {isOver && !hasPlayer && <div className={classes.droppable} />}
             {isOver && hasPlayer && <div className={classes.undroppable} />}
-            {isOver &&
-                ((x === 0 && y === 2) ||
-                 (x === 0 && y === 1) ||
-                 (x === 0 && y === 5) ||
-                 (x === 0 && y === 6) ||
-                 (x === 7 && y === 2) ||
-                 (x === 7 && y === 5) ||
-                 (x === 7 && y === 6) ||
-                 (x === 7 && y === 1)
-                ) && <div className={classes.undroppable} />}
+            {isOver && checkIfIsForbiddenPosition(x, y) && <div className={classes.undroppable} />}
         </div>
     )
 

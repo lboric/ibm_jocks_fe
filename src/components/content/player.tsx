@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 import { useDrag } from "react-dnd";
 import { Avatar } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
@@ -26,7 +26,6 @@ export type Props = {
 const Player: FC<Props> = (props) => {
     const classes = useStyles();
     const { playerIndex, playerPosition } = props;
-
     const [{ isDragging }, drag] = useDrag(() => ({
         type: ItemTypes.PLAYER,
         item: playerPosition,
@@ -39,7 +38,7 @@ const Player: FC<Props> = (props) => {
         <Avatar
             className={classes.player}
             ref={drag}
-            style={ playerIndex <= 4 ? {backgroundColor: 'black', opacity: isDragging ? 0.5 : 1} : { opacity: isDragging ? 0.5 : 1}}>
+            style={ playerIndex <= 4 ? { backgroundColor: 'black', opacity: isDragging ? 0.5 : 1 } : { opacity: isDragging ? 0.5 : 1}}>
             {playerIndex}
         </Avatar>
     )

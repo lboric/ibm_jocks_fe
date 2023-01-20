@@ -22,7 +22,6 @@ type Props = {
 const PlayerPortrait: FC<Props> = (props) => {
     const classes = useStyles();
     const { name, surname } = props;
-
     const concatNameSurname = (name: string, surname: string) => {
         return name + ' ' + surname;
     }

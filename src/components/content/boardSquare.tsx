@@ -82,22 +82,40 @@ const BoardSquare: FC<Props> = (props) => {
     }
 
     function determineSquareCss(x: number, y: number): string {
-        if (x !== 0 && x % 4 === 0) {
+        // Goal lines
+        if (x === 0 && y === 3) {
+            return "2.5px 0px 0px 0px";
+        } else if (x === 1 && y === 3) {
+            return "2.5px 2.5px 0px 0px";
+        } else if (x === 1 && y === 4) {
+            return "0px 2.5px 0px 0px";
+        } else if (x === 1 && y === 5) {
+            return "0px 2.5px 0px 0px";
+        } else if (x === 1 && y === 6) {
+            return "0px 2.5px 0px 0px";
+        } else if (x === 1 && y === 7) {
+            return "0px 2.5px 2.5px 0px";
+        } else if (x === 0 && y === 7) {
+            return "0px 0px 2.5px 0px";
+        } else if (x === 15 && y === 3) {
+            return "2.5px 2.5px 0px 0px";
+        } else if (x === 14 && y === 3) {
+            return "2.5px 0px 0px 2.5px";
+        } else if (x === 14 && y === 4) {
             return "0px 0px 0px 2.5px";
-        } else if (x !== 0 && x !== 6 && x % 3 === 0) {
-            return '0px 2.5px 0px 0px';
-        } else if (x === 0 && (y === 3 || y === 4)) {
-            return '0px 2.5px 0px 0px'
-        } else if (x === 0 && (y === 5)) {
-            return '0px 2.5px 2.5px 0px'
-        } else if (x === 0 && (y === 2)) {
-            return '2.5px 2.5px 0px 0px'
-        } else if (x === 7 && (y === 3 || y === 4)) {
-            return '0px 0px 0px 2.5px'
-        } else if (x === 7 && (y === 5)) {
-            return '0px 0px 2.5px 2.5px'
-        } else if (x === 7 && (y === 2)) {
-            return '2.5px 0px 0px 2.5px'
+        } else if (x === 14 && y === 5) {
+            return "0px 0px 0px 2.5px";
+        } else if (x === 14 && y === 6) {
+            return "0px 0px 0px 2.5px";
+        } else if (x === 14 && y === 7) {
+            return "0px 0px 2.5px 2.5px";
+        } else if (x === 15 && y === 7) {
+            return "0px 0px 2.5px 0px";
+        // Center lines
+        } else if (x === 7) {
+            return "0px 2.5px 0px 0px";
+        } else if (x === 8) {
+            return "0px 0px 0px 2.5px";
         } else {
             return '0px 0px 0px 0px';
         }

@@ -3,15 +3,15 @@ import { useDrag } from "react-dnd";
 import { Avatar } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import { ItemTypes } from "../../models/playerData";
-import {PlayerPosition} from "../../models/playerPositionData";
+import { PlayerPosition } from "../../models/playerPositionData";
 
 const useStyles = makeStyles(() =>
     createStyles({
         player: {
             fontWeight: 'bold',
             cursor: 'move',
-            width: '60px!important',
-            height: '60px!important',
+            width: '50px!important',
+            height: '50px!important',
             bottom: '7px',
             left: '15px'
         }

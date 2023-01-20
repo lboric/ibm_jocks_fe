@@ -15,12 +15,12 @@ const Pitch: FC<Props> = (props) => {
     const { playerPositions, movePlayer } = props;
     const squares = []
 
-    for (let i = 0; i < 64; i++) {
-        const x = i % 8;
-        const y = Math.floor(i / 8);
-        const hasPlayer = checkIfSquareHasPlayerOnIt(x, y, playerPositions);
+    for (let i = 0; i < 11; i++) {
+        for (let j = 0; j < 16; j++) {
+            const hasPlayer = checkIfSquareHasPlayerOnIt(j, i, playerPositions);
 
-        squares.push(renderSquare(x, y, hasPlayer));
+            squares.push(renderSquare(j, i, hasPlayer));
+        }
     }
 
     return (
@@ -31,10 +31,9 @@ const Pitch: FC<Props> = (props) => {
                     borderColor: 'white',
                     borderWidth: '5px',
                     width: '90%',
-                    height: '680px',
+                    height: '780px',
                     display: 'flex',
                     flexWrap: 'wrap',
-                    backgroundImage: './../static/pitch.png',
                     left: '10000px'
                 }}
             >
@@ -55,7 +54,7 @@ const Pitch: FC<Props> = (props) => {
         };
 
         return (
-            <div style={{ width: '12.5%', height: '12.5%'}}>
+            <div style={{ width: '6.25%', height: '9.09%'}}>
                 <BoardSquare x={x} y={y} hasPlayer={hasPlayer} movePlayer={movePlayer}>
                     {renderPiece(x, y, hasPlayer)}
                 </BoardSquare>

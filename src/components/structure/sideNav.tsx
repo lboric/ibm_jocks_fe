@@ -13,27 +13,24 @@ import {
     PeopleOutline,
     SportsSoccerOutlined
 } from "@mui/icons-material";
+import { Colors } from "../../enums/colors";
 
 const useStyles = makeStyles((theme) =>
     createStyles({
         menu: {
-            width: "100%",
-            height: '100vw',
-            backgroundColor: "#1976d2",
+            width: '100%',
+            height: '100vh', // TODO Ask Begovic
+            backgroundColor: Colors.NAV_BLUE,
             color: "white",
             position: "relative",
-            top: 0
         },
         menuIcon: {
-            marginRight: "20px"
-        },
-        selected: {
-            color: "primary"
+            marginRight: '3%'
         }
     })
 );
 
-const SideNav: React.FC<{}> = () => {
+const SideNav: React.FC = () => {
     const classes = useStyles();
 
     return (

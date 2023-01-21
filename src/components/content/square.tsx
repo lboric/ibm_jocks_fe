@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
 import { createStyles, makeStyles } from "@mui/styles";
+import { Colors } from "../../enums/colors";
 
 const useStyles = makeStyles(() =>
     createStyles({
         square: {
             width: '100%',
             height: '100%',
-            backgroundColor: 'green',
-            color: 'green',
+            backgroundColor: Colors.PITCH_GREEN,
             textAlign: 'center'
         }
     })

@@ -6,6 +6,7 @@ import { createStyles, makeStyles } from "@mui/styles";
 import { checkIfIsForbiddenPosition } from "../../utils/playerPositionUtil";
 import { ItemTypes } from "../../models/playerData";
 import { PlayerPosition } from "../../models/playerPositionData";
+import { Colors } from "../../enums/colors";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -13,7 +14,7 @@ const useStyles = makeStyles(() =>
             position: 'relative',
             width: '100%',
             height: '100%',
-            backgroundColor: 'green',
+            backgroundColor: Colors.PITCH_GREEN,
             borderStyle: 'solid',
             borderColor: 'white',
         },
@@ -54,7 +55,7 @@ const BoardSquare: FC<Props> = (props) => {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: ItemTypes.PLAYER,
         canDrop: () => true,
-        drop: (currentPlayerPosition) => handleMovePlayer(x, y, (currentPlayerPosition as PlayerPosition)),
+        drop: (currentPlayerPosition) => movePlayer(x, y, (currentPlayerPosition as PlayerPosition)),
         collect: monitor => ({
             isOver: monitor.isOver()
         })
@@ -66,20 +67,15 @@ const BoardSquare: FC<Props> = (props) => {
             ref={drop}
             style={{
                 borderWidth: determineSquareCss(x, y),
-                bottom: hasPlayer ? '0.51px' : '16.5px',
+                bottom: hasPlayer ? '0.5px' : '16.5px',
                 padding: hasPlayer ? '20px' : '0px'
             }}
         >
             <Square>{children}</Square>
             {isOver && !hasPlayer && <div className={classes.droppable} />}
-            {isOver && hasPlayer && <div className={classes.undroppable} />}
-            {isOver && checkIfIsForbiddenPosition(x, y) && <div className={classes.undroppable} />}
+            {isOver && (hasPlayer || checkIfIsForbiddenPosition(x,y)) && <div className={classes.undroppable} />}
         </div>
     )
-
-    function handleMovePlayer(x: number, y: number, currentPlayerPosition: PlayerPosition) {
-        movePlayer(x, y, currentPlayerPosition);
-    }
 
     function determineSquareCss(x: number, y: number): string {
         // Goal lines
@@ -98,7 +94,7 @@ const BoardSquare: FC<Props> = (props) => {
         } else if (x === 0 && y === 7) {
             return "0px 0px 2.5px 0px";
         } else if (x === 15 && y === 3) {
-            return "2.5px 2.5px 0px 0px";
+            return "2.5px 0px 0px 0px";
         } else if (x === 14 && y === 3) {
             return "2.5px 0px 0px 2.5px";
         } else if (x === 14 && y === 4) {

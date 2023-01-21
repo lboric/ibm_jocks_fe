@@ -4,6 +4,7 @@ export function checkIfIsForbiddenPosition(x: number, y: number): boolean {
     return (x === 0 && y === 3) || (x === 0 && y === 2) ||
            (x === 1 && y === 3) || (x === 1 && y === 2) ||
            (x === 0 && y === 7) || (x === 0 && y === 8) ||
+           (x === 1 && y === 7) || (x === 1 && y === 8) ||
            (x === 14 && y === 3) || (x === 14 && y === 2) ||
            (x === 15 && y === 3) || (x === 15 && y === 2) ||
            (x === 14 && y === 7) || (x === 14 && y === 8) ||
@@ -21,9 +22,9 @@ export function checkIfLeftHalfOfTheFiledHasBeenFilled(playerPositions: PlayerPo
 }
 
 export function checkIfRightHalfOfTheFiledHasBeenFilled(playerPositions: PlayerPosition[]): boolean {
-    const leftHalfX = [8, 9, 10, 11, 12, 13, 14, 15]
+    const rightHalfX = [8, 9, 10, 11, 12, 13, 14, 15]
 
-    return playerPositions.filter(position => leftHalfX.includes(position.playerX)).length === 5;
+    return playerPositions.filter(position => rightHalfX.includes(position.playerX)).length === 5;
 }
 
 export function sortPlayerPositionsByX(playerPositions: PlayerPosition[]): PlayerPosition[] {

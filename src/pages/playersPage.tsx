@@ -3,7 +3,7 @@ import { createStyles, makeStyles } from "@mui/styles";
 import PlayerPortrait from "../components/content/playerPortrait";
 import { GoalScoringData } from "../models/goalScoringData";
 import { Grid } from "@mui/material";
-import { FontVariant } from "../enums/fontVariant";
+import { Fonts } from "../enums/fonts";
 import DarkLabel from "../components/content/labels/darkLabel";
 
 const useStyles = makeStyles(() =>
@@ -28,7 +28,7 @@ const PlayersPage: FC<Props> = (props) => {
     return (
         <>
             <div className={classes.title}>
-                <DarkLabel variant={FontVariant.H4}>
+                <DarkLabel variant={Fonts.H4}>
                     Players
                 </DarkLabel>
             </div>

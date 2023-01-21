@@ -11,7 +11,7 @@ import {
 import { GoalScoringData } from "../../models/goalScoringData";
 import { isNotEmpty } from "../../utils/arrayUtils";
 import DarkLabel from "./labels/darkLabel";
-import { FontVariant } from "../../enums/fontVariant";
+import { Fonts } from "../../enums/fonts";
 
 type Props = {
     goalScoringData: GoalScoringData[]
@@ -25,10 +25,10 @@ const ScoresTable: React.FC<Props> = (props: Props) => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell><DarkLabel variant={FontVariant.H6}>Rank</DarkLabel></TableCell>
-                        <TableCell><DarkLabel variant={FontVariant.H6}>Name</DarkLabel></TableCell>
-                        <TableCell><DarkLabel variant={FontVariant.H6}>Surname</DarkLabel></TableCell>
-                        <TableCell><DarkLabel variant={FontVariant.H6} alignRight={true}>Goals</DarkLabel></TableCell>
+                        <TableCell><DarkLabel variant={Fonts.H6}>Rank</DarkLabel></TableCell>
+                        <TableCell><DarkLabel variant={Fonts.H6}>Name</DarkLabel></TableCell>
+                        <TableCell><DarkLabel variant={Fonts.H6}>Surname</DarkLabel></TableCell>
+                        <TableCell><DarkLabel variant={Fonts.H6} alignRight={true}>Goals</DarkLabel></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

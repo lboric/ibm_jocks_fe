@@ -13,7 +13,7 @@ import { createStyles, makeStyles } from "@mui/styles";
 import LightLabel from "../content/labels/lightLabel";
 import footballLogo from '../../static/football.png'
 import goalLogo from '../../static/goal.png'
-import { FontVariant } from "../../enums/fontVariant";
+import { Fonts } from "../../enums/fonts";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -36,8 +36,8 @@ const TopNav = () => {
                 <Button>
                     <CardHeader
                         avatar={<Avatar sx={{ height: '50px', width: '50px', backgroundColor: 'blue' }} color="primary" src={footballLogo} />}
-                        title={<LightLabel variant={FontVariant.H5}>___IBM iX Zagreb</LightLabel>}
-                        subheader={<LightLabel variant={FontVariant.H6}>Football________</LightLabel>}
+                        title={<LightLabel variant={Fonts.H5}>___IBM iX Zagreb</LightLabel>}
+                        subheader={<LightLabel variant={Fonts.H6}>Football________</LightLabel>}
                     />
                     <Avatar variant="rounded" sx={{ height: '70px', width: '80px'}} color="primary" src={goalLogo} />
                 </Button>

@@ -2,49 +2,38 @@ import React, { useEffect, useState } from "react";
 import { CssBaseline, Divider, Grid } from "@mui/material";
 import { createStyles, makeStyles, ThemeProvider } from "@mui/styles";
 import { Route, Routes } from "react-router-dom";
+import { fetchGoalScoringData } from "./actions/api";
+import { createTheme } from "@mui/material/styles";
+import { useAppSelector } from "./redux/redux-hooks";
 import './App.css';
 import TablePage from "./pages/tablePage";
 import PlayersPage from "./pages/playersPage";
 import TopNav from "./components/structure/topNav";
 import SideNav from "./components/structure/sideNav";
-import { fetchGoalScoringData } from "./actions/api";
-import { createTheme } from "@mui/material/styles";
 import SquadPage from "./pages/squadPage";
-import { useAppSelector } from "./redux/redux-hooks";
 
+// Thematic styling throughout the whole app
 const theme = createTheme({
     components: {
         MuiTypography: {
             defaultProps: {
-                fontFamily: 'cursive',
-            }
-        },
-        MuiCard: {
-            defaultProps: {
-                backgroundColor: 'blue'
+                fontFamily: 'arial',
             }
         }
     }
 });
 
+// File specific styling
 const useStyles = makeStyles(() =>
     createStyles({
-        fixed: {
-            flexGrow: 0,
-            flexShrink: 0,
-            flexBasis: "240px"
-        },
         mainContent: {
-            padding: 60,
-            flexGrow: 1,
-            backgroundColor: 'lightblue'
+            padding: '3%',
+            backgroundColor: 'lightblue',
+            textAlign: "-webkit-center"
         },
         divider: {
-            marginTop: "50px",
-            marginBottom: "50px"
-        },
-        innerGrid: {
-            textAlign: "-webkit-center"
+            marginTop: '3%',
+            marginBottom: '3%'
         }
     })
 );
@@ -66,13 +55,14 @@ function App() {
                 <Grid item xs={12}>
                     <TopNav />
                 </Grid>
-                <Grid item xs={2} className={classes.fixed}>
+                <Grid item xs={2}>
                     <SideNav />
                 </Grid>
-                <Grid item xs={10} spacing={10} direction="column" alignItems="center"
-                      justifyContent="center" className={classes.mainContent} >
-                    <Grid item className={classes.innerGrid}>
-                        <div className={classes.divider}><Divider /></div>
+                <Grid item xs={10} spacing={10} direction="column" className={classes.mainContent} >
+                    <Grid item>
+                        <div className={classes.divider}>
+                            <Divider />
+                        </div>
                         <Routes>
                             <Route path="/" element={<TablePage goalScoringData={goalScoringData} />} />
                             <Route path="/players" element={<PlayersPage goalScoringData={goalScoringData} />} />

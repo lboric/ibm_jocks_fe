@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
-import { FontVariant } from "../../../enums/fontVariant";
+import { Fonts } from "../../../enums/fonts";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() =>
 );
 
 type Props = {
-    variant: FontVariant;
+    variant: Fonts;
     children?: React.ReactNode;
 }
 

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { GoalScoringData } from "../models/goalScoringData";
 import { createStyles, makeStyles } from "@mui/styles";
-import { FontVariant } from "../enums/fontVariant";
+import { Fonts } from "../enums/fonts";
 import ScoresTable from "../components/content/scoresTable";
 import DarkLabel from "../components/content/labels/darkLabel";
 
@@ -24,7 +24,7 @@ const TablePage: FC<Props> = (props) => {
     return (
         <>
             <div className={classes.title}>
-                <DarkLabel variant={FontVariant.H4}>
+                <DarkLabel variant={Fonts.H4}>
                     Leaderboard
                 </DarkLabel>
             </div>

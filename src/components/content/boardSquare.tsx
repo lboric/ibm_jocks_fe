@@ -4,7 +4,9 @@ import Square from "./square";
 import { useDrop } from "react-dnd";
 import { createStyles, makeStyles } from "@mui/styles";
 import { checkIfIsForbiddenPosition } from "../../utils/playerPositionUtil";
-import { ItemTypes, PlayerData } from "../../models/playerData";
+import { ItemTypes } from "../../enums/playerData";
+import { PlayerPosition } from "../../models/playerPositionData";
+import { Colors } from "../../enums/colors";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -12,7 +14,7 @@ const useStyles = makeStyles(() =>
             position: 'relative',
             width: '100%',
             height: '100%',
-            backgroundColor: 'green',
+            backgroundColor: Colors.PITCH_GREEN,
             borderStyle: 'solid',
             borderColor: 'white',
         },
@@ -44,7 +46,7 @@ type Props = {
     y: number;
     hasPlayer: boolean;
     children: React.ReactNode;
-    movePlayer: (x: number, y: number, index: number) => void;
+    movePlayer: (x: number, y: number, currentPlayerPosition: PlayerPosition) => void;
 }
 
 const BoardSquare: FC<Props> = (props) => {
@@ -53,7 +55,7 @@ const BoardSquare: FC<Props> = (props) => {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: ItemTypes.PLAYER,
         canDrop: () => true,
-        drop: (player) => movePlayer(x, y, (player as PlayerData).playerIndex),
+        drop: (currentPlayerPosition) => movePlayer(x, y, (currentPlayerPosition as PlayerPosition)),
         collect: monitor => ({
             isOver: monitor.isOver()
         })
@@ -65,34 +67,51 @@ const BoardSquare: FC<Props> = (props) => {
             ref={drop}
             style={{
                 borderWidth: determineSquareCss(x, y),
-                bottom: hasPlayer ? '0.51px' : '16.5px',
+                bottom: hasPlayer ? '0.5px' : '16.5px',
                 padding: hasPlayer ? '20px' : '0px'
             }}
         >
             <Square>{children}</Square>
             {isOver && !hasPlayer && <div className={classes.droppable} />}
-            {isOver && hasPlayer && <div className={classes.undroppable} />}
-            {isOver && checkIfIsForbiddenPosition(x, y) && <div className={classes.undroppable} />}
+            {isOver && (hasPlayer || checkIfIsForbiddenPosition(x,y)) && <div className={classes.undroppable} />}
         </div>
     )
 
     function determineSquareCss(x: number, y: number): string {
-        if (x !== 0 && x % 4 === 0) {
+        // Goal lines
+        if (x === 0 && y === 3) {
+            return "2.5px 0px 0px 0px";
+        } else if (x === 1 && y === 3) {
+            return "2.5px 2.5px 0px 0px";
+        } else if (x === 1 && y === 4) {
+            return "0px 2.5px 0px 0px";
+        } else if (x === 1 && y === 5) {
+            return "0px 2.5px 0px 0px";
+        } else if (x === 1 && y === 6) {
+            return "0px 2.5px 0px 0px";
+        } else if (x === 1 && y === 7) {
+            return "0px 2.5px 2.5px 0px";
+        } else if (x === 0 && y === 7) {
+            return "0px 0px 2.5px 0px";
+        } else if (x === 15 && y === 3) {
+            return "2.5px 0px 0px 0px";
+        } else if (x === 14 && y === 3) {
+            return "2.5px 0px 0px 2.5px";
+        } else if (x === 14 && y === 4) {
             return "0px 0px 0px 2.5px";
-        } else if (x !== 0 && x !== 6 && x % 3 === 0) {
-            return '0px 2.5px 0px 0px';
-        } else if (x === 0 && (y === 3 || y === 4)) {
-            return '0px 2.5px 0px 0px'
-        } else if (x === 0 && (y === 5)) {
-            return '0px 2.5px 2.5px 0px'
-        } else if (x === 0 && (y === 2)) {
-            return '2.5px 2.5px 0px 0px'
-        } else if (x === 7 && (y === 3 || y === 4)) {
-            return '0px 0px 0px 2.5px'
-        } else if (x === 7 && (y === 5)) {
-            return '0px 0px 2.5px 2.5px'
-        } else if (x === 7 && (y === 2)) {
-            return '2.5px 0px 0px 2.5px'
+        } else if (x === 14 && y === 5) {
+            return "0px 0px 0px 2.5px";
+        } else if (x === 14 && y === 6) {
+            return "0px 0px 0px 2.5px";
+        } else if (x === 14 && y === 7) {
+            return "0px 0px 2.5px 2.5px";
+        } else if (x === 15 && y === 7) {
+            return "0px 0px 2.5px 0px";
+        // Center lines
+        } else if (x === 7) {
+            return "0px 2.5px 0px 0px";
+        } else if (x === 8) {
+            return "0px 0px 0px 2.5px";
         } else {
             return '0px 0px 0px 0px';
         }

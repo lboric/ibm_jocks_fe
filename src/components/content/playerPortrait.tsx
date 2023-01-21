@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Avatar, Card } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
-import { FontVariant } from "../../enums/fontVariant";
+import { Fonts } from "../../enums/fonts";
 import DarkLabel from "./labels/darkLabel";
 
 const useStyles = makeStyles(() =>
@@ -22,7 +22,6 @@ type Props = {
 const PlayerPortrait: FC<Props> = (props) => {
     const classes = useStyles();
     const { name, surname } = props;
-
     const concatNameSurname = (name: string, surname: string) => {
         return name + ' ' + surname;
     }
@@ -33,7 +32,7 @@ const PlayerPortrait: FC<Props> = (props) => {
                 <Avatar sx={{ margin: '10px', width: '150px', height: '150px' }}>
                     R
                 </Avatar>
-                <DarkLabel variant={FontVariant.H6}>
+                <DarkLabel variant={Fonts.H6}>
                     <div style={{textAlign: 'center'}}>{concatNameSurname(name, surname)}</div>
                 </DarkLabel>
             </Card>

@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { useDrag } from "react-dnd";
 import { Avatar } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
-import { ItemTypes } from "../../models/playerData";
+import { ItemTypes } from "../../enums/playerData";
 import { PlayerPosition } from "../../models/playerPositionData";
 
 const useStyles = makeStyles(() =>

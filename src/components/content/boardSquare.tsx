@@ -4,7 +4,7 @@ import Square from "./square";
 import { useDrop } from "react-dnd";
 import { createStyles, makeStyles } from "@mui/styles";
 import { checkIfIsForbiddenPosition } from "../../utils/playerPositionUtil";
-import { ItemTypes } from "../../models/playerData";
+import { ItemTypes } from "../../enums/playerData";
 import { PlayerPosition } from "../../models/playerPositionData";
 import { Colors } from "../../enums/colors";
 

@@ -1,12 +1,15 @@
-import React, { FC } from 'react'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { PlayerPosition } from "../../models/playerPositionData";
-import { findPlayerIndex } from "../../utils/playerPositionUtil";
-import { createStyles, makeStyles } from "@mui/styles";
-import { PitchDimensions } from "../../enums/dimensions";
+import React, {FC} from 'react'
+import {DndProvider} from 'react-dnd'
+import {HTML5Backend} from 'react-dnd-html5-backend'
+import {PlayerPosition} from "../../models/playerPositionData";
+import {checkIfFootballIsAlreadyOnPosition, checkIfPlayerIsAlreadyOnPosition, findPlayerIndex} from "../../utils/playerPositionUtil";
+import {createStyles, makeStyles} from "@mui/styles";
+import {PitchDimensions} from "../../enums/dimensions";
 import Player from "./player";
 import BoardSquare from './boardSquare';
+import {FootballPosition} from "../../models/footballPositionData";
+import {ItemTypes} from "../../enums/itemTypes";
+import Football from "./football";
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -27,20 +30,29 @@ const useStyles = makeStyles(() =>
 );
 
 type Props = {
+    footballPosition: FootballPosition;
     playerPositions: PlayerPosition[];
+    moveFootball: (x: number, y: number) => void;
     movePlayer: (x: number, y: number, currentPlayerPosition: PlayerPosition) => void;
 }
 
 const Pitch: FC<Props> = (props) => {
     const classes = useStyles();
-    const { playerPositions, movePlayer } = props;
+    const { playerPositions, footballPosition, movePlayer, moveFootball } = props;
     const squares = []
 
     for (let i = 0; i < PitchDimensions.HEIGHT; i++) {
         for (let j = 0; j < PitchDimensions.WIDTH; j++) {
-            const hasPlayer = checkIfSquareHasPlayerOnIt(j, i, playerPositions);
+            const hasPlayer = checkIfPlayerIsAlreadyOnPosition(j, i, playerPositions);
+            const hasFootball = !hasPlayer && checkIfFootballIsAlreadyOnPosition(j, i, footballPosition);
 
-            squares.push(renderSquare(j, i, hasPlayer));
+            if (hasFootball) {
+                squares.push(renderSquare(j, i, true, ItemTypes.FOOTBALL));
+            } else if (hasPlayer) {
+                squares.push(renderSquare(j, i, true, ItemTypes.PLAYER));
+            } else {
+                squares.push(renderSquare(j, i, false));
+            }
         }
     }
 
@@ -52,12 +64,16 @@ const Pitch: FC<Props> = (props) => {
         </DndProvider>
     )
 
-    function renderSquare(x: number, y: number, hasPlayer: boolean): React.ReactNode {
-        const renderPiece = (x: number, y: number, hasPlayer: boolean) => {
-            if (hasPlayer) {
-                const playerIndex = findPlayerIndex(x, y, playerPositions);
+    function renderSquare(x: number, y: number, hasItem: boolean, itemType?: ItemTypes): React.ReactNode {
+        const renderPiece = (x: number, y: number, hasItem: boolean) => {
+            if (hasItem) {
+                if (itemType === ItemTypes.PLAYER) {
+                    const playerIndex = findPlayerIndex(x, y, playerPositions);
 
-                return <Player playerPosition={{playerX: x, playerY: y} as PlayerPosition} playerIndex={playerIndex} />
+                    return <Player playerPosition={{playerX: x, playerY: y} as PlayerPosition} playerIndex={playerIndex} />
+                } else if (itemType === ItemTypes.FOOTBALL) {
+                    return  <Football />
+                }
             } else {
                 return <p style={{display: 'hidden'}} />
             }
@@ -65,16 +81,13 @@ const Pitch: FC<Props> = (props) => {
 
         return (
             <div className={classes.squareWrapper}>
-                <BoardSquare x={x} y={y} hasPlayer={hasPlayer} movePlayer={movePlayer}>
-                    {renderPiece(x, y, hasPlayer)}
+                <BoardSquare x={x} y={y} hasItem={hasItem} movePlayer={movePlayer} moveFootball={moveFootball}>
+                    {renderPiece(x, y, hasItem)}
                 </BoardSquare>
             </div>
         )
     }
 
-    function checkIfSquareHasPlayerOnIt(x: number, y: number, playerPositions: PlayerPosition[]): boolean {
-        return (playerPositions ?? []).some(position => position.playerX === x && position.playerY === y);
-    }
 }
 
 export default Pitch;

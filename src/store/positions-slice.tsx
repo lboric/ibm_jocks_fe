@@ -10,10 +10,12 @@ import {
     generatePositionXOnTheRight,
     generatePositionXOnTheLeft,
     generateRandomXPitchPosition,
-    generateRandomYPitchPosition
+    generateRandomYPitchPosition, checkIfFootballIsAlreadyOnPosition
 } from "../utils/playerPositionUtil";
+import { FootballPosition } from "../models/footballPositionData";
 
-type PlayerPositionsState = {
+type PositionsState = {
+    footballPosition: FootballPosition
     playerPositions: PlayerPosition[]
 };
 
@@ -24,7 +26,13 @@ type PlayerPositionActionPayload = {
     y: number;
 }
 
-const initialPlayerPositionsState: PlayerPositionsState = {
+type FootballPositionActionPayload = {
+    x: number;
+    y: number;
+}
+
+const initialPositionsState: PositionsState = {
+    footballPosition: { footballX: 0, footballY: 0 },
     playerPositions: [
         { playerX: 3, playerY: 0},
         { playerX: 4, playerY: 0},
@@ -39,19 +47,30 @@ const initialPlayerPositionsState: PlayerPositionsState = {
     ]
 };
 
-const playerPositionsSlice = createSlice({
-    name: 'playerPositions',
-    initialState: initialPlayerPositionsState,
+const positionsSlice = createSlice({
+    name: 'positions',
+    initialState: initialPositionsState,
     reducers: {
+        setFootballPosition(state, action: PayloadAction<FootballPositionActionPayload>) {
+            const x = action.payload.x;
+            const y = action.payload.y;
+            const playerPositionsCopied = [...state.playerPositions];
+
+            if (!checkIfPlayerIsAlreadyOnPosition(x, y, playerPositionsCopied)
+                && !checkIfIsForbiddenPosition(x, y)) {
+                state.footballPosition = { footballX: x, footballY: y } as FootballPosition
+            }
+        },
         setPlayerPosition(state, action: PayloadAction<PlayerPositionActionPayload>) {
             const x = action.payload.x;
             const y = action.payload.y;
             const playerX = action.payload.playerX;
             const playerY = action.payload.playerY;
             const playerPositionsCopied = [...state.playerPositions];
-            const checkHasPlayer = playerPositionsCopied.some((position) => position.playerX === x && position.playerY === y);
 
-            if (!checkHasPlayer && !checkIfIsForbiddenPosition(x, y)) {
+            if (!checkIfPlayerIsAlreadyOnPosition(x, y, playerPositionsCopied)
+                && !checkIfFootballIsAlreadyOnPosition(x, y, state.footballPosition)
+                && !checkIfIsForbiddenPosition(x, y)) {
                 const playerIndex = findPlayerIndex(playerX, playerY, state.playerPositions);
 
                 playerPositionsCopied[playerIndex].playerX = action.payload.x;
@@ -73,7 +92,10 @@ const playerPositionsSlice = createSlice({
                         generateRandomXPitchPosition();
                 const y = generateRandomYPitchPosition();
 
-                if (!checkIfIsForbiddenPosition(x, y) && !checkIfPlayerIsAlreadyOnPosition(x, y, playerPositionsRandom)) {
+                if (!checkIfIsForbiddenPosition(x, y)
+                    && !checkIfPlayerIsAlreadyOnPosition(x, y, playerPositionsRandom)
+                    && !checkIfFootballIsAlreadyOnPosition(x, y, state.footballPosition)
+                ) {
                     playerPositionsRandom.push({ playerX: x, playerY: y } as PlayerPosition);
                 }
             }
@@ -83,4 +105,4 @@ const playerPositionsSlice = createSlice({
     }
 });
 
-export default playerPositionsSlice;
+export default positionsSlice;

@@ -3,7 +3,7 @@ import React from "react";
 import Square from "./square";
 import { useDrop } from "react-dnd";
 import { createStyles, makeStyles } from "@mui/styles";
-import { checkIfIsForbiddenPosition } from "../../utils/playerPositionUtil";
+import { checkIfIsForbiddenPosition } from "../../utils/positionUtil";
 import { ItemTypes } from "../../enums/itemTypes";
 import { PlayerPosition } from "../../models/playerPositionData";
 import { Colors } from "../../enums/colors";

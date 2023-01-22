@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {DndProvider} from 'react-dnd'
 import {HTML5Backend} from 'react-dnd-html5-backend'
 import {PlayerPosition} from "../../models/playerPositionData";
-import {checkIfFootballIsAlreadyOnPosition, checkIfPlayerIsAlreadyOnPosition, findPlayerIndex} from "../../utils/playerPositionUtil";
+import {checkIfFootballIsAlreadyOnPosition, checkIfPlayerIsAlreadyOnPosition, findPlayerIndex} from "../../utils/positionUtil";
 import {createStyles, makeStyles} from "@mui/styles";
 import {PitchDimensions} from "../../enums/dimensions";
 import Player from "./player";

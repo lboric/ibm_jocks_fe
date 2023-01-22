@@ -11,7 +11,7 @@ import {
     generatePositionXOnTheLeft,
     generateRandomXPitchPosition,
     generateRandomYPitchPosition, checkIfFootballIsAlreadyOnPosition
-} from "../utils/playerPositionUtil";
+} from "../utils/positionUtil";
 import { FootballPosition } from "../models/footballPositionData";
 
 type PositionsState = {

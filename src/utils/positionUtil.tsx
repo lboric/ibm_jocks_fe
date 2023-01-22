@@ -1,5 +1,5 @@
 import { PlayerPosition } from "../models/playerPositionData";
-import {FootballPosition} from "../models/footballPositionData";
+import { FootballPosition } from "../models/footballPositionData";
 
 export function checkIfIsForbiddenPosition(x: number, y: number): boolean {
     return (x === 0 && y === 3) || (x === 0 && y === 2) ||

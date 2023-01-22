@@ -1,15 +1,15 @@
-import React, {FC} from 'react'
-import {DndProvider} from 'react-dnd'
-import {HTML5Backend} from 'react-dnd-html5-backend'
-import {PlayerPosition} from "../../models/playerPositionData";
-import {checkIfFootballIsAlreadyOnPosition, checkIfPlayerIsAlreadyOnPosition, findPlayerIndex} from "../../utils/positionUtil";
-import {createStyles, makeStyles} from "@mui/styles";
-import {PitchDimensions} from "../../enums/dimensions";
+import React, { FC } from 'react'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { PlayerPosition } from "../../models/playerPositionData";
+import { checkIfFootballIsAlreadyOnPosition, checkIfPlayerIsAlreadyOnPosition, findPlayerIndex } from "../../utils/positionUtil";
+import { createStyles, makeStyles } from "@mui/styles";
+import { PitchDimensions } from "../../enums/dimensions";
+import { FootballPosition } from "../../models/footballPositionData";
+import { ItemTypes } from "../../enums/itemTypes";
+import Football from "./football";
 import Player from "./player";
 import BoardSquare from './boardSquare';
-import {FootballPosition} from "../../models/footballPositionData";
-import {ItemTypes} from "../../enums/itemTypes";
-import Football from "./football";
 
 const useStyles = makeStyles(() =>
     createStyles({

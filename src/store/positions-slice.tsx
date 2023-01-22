@@ -10,7 +10,8 @@ import {
     generatePositionXOnTheRight,
     generatePositionXOnTheLeft,
     generateRandomXPitchPosition,
-    generateRandomYPitchPosition, checkIfFootballIsAlreadyOnPosition
+    generateRandomYPitchPosition,
+    checkIfFootballIsAlreadyOnPosition
 } from "../utils/positionUtil";
 import { FootballPosition } from "../models/footballPositionData";
 

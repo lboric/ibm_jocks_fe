@@ -40,7 +40,8 @@ const useStyles = makeStyles(() =>
 
 function App() {
     const classes = useStyles();
-    const playerPositions = useAppSelector(state => state.playerPositions).playerPositions;
+    const playerPositions = useAppSelector(state => state.positions).playerPositions;
+    const footballPosition = useAppSelector(state => state.positions).footballPosition;
     const [goalScoringData, setGoalScoringData] = useState([]);
 
     // api call
@@ -66,7 +67,7 @@ function App() {
                         <Routes>
                             <Route path="/" element={<TablePage goalScoringData={goalScoringData} />} />
                             <Route path="/players" element={<PlayersPage goalScoringData={goalScoringData} />} />
-                            <Route path="/squads" element={<SquadPage  playerPositions={playerPositions} />} />
+                            <Route path="/squads" element={<SquadPage  playerPositions={playerPositions} footballPosition={footballPosition} />} />
                         </Routes>
                     </Grid>
                 </Grid>

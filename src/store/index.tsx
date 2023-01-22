@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import playerPositionsSlice from './player-positions-slice';
+import positionsSlice from './positions-slice';
 
 const store = configureStore({
-    reducer: { playerPositions: playerPositionsSlice.reducer }
+    reducer: {
+        positions: positionsSlice.reducer
+    }
 })
 
 export type RootState = ReturnType<typeof store.getState>;

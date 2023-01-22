@@ -4,7 +4,7 @@ import Square from "./square";
 import { useDrop } from "react-dnd";
 import { createStyles, makeStyles } from "@mui/styles";
 import { checkIfIsForbiddenPosition } from "../../utils/playerPositionUtil";
-import { ItemTypes } from "../../enums/playerData";
+import { ItemTypes } from "../../enums/itemTypes";
 import { PlayerPosition } from "../../models/playerPositionData";
 import { Colors } from "../../enums/colors";
 
@@ -44,18 +44,19 @@ const useStyles = makeStyles(() =>
 type Props = {
     x: number;
     y: number;
-    hasPlayer: boolean;
+    hasItem: boolean;
     children: React.ReactNode;
+    moveFootball: (x: number, y: number) => void;
     movePlayer: (x: number, y: number, currentPlayerPosition: PlayerPosition) => void;
 }
 
 const BoardSquare: FC<Props> = (props) => {
     const classes = useStyles();
-    const { children, x, y, hasPlayer, movePlayer } = props;
+    const { children, x, y, hasItem, movePlayer, moveFootball } = props;
     const [{ isOver }, drop] = useDrop(() => ({
-        accept: ItemTypes.PLAYER,
+        accept: [ItemTypes.PLAYER, ItemTypes.FOOTBALL],
         canDrop: () => true,
-        drop: (currentPlayerPosition) => movePlayer(x, y, (currentPlayerPosition as PlayerPosition)),
+        drop: (item) => handleMove(x, y, item),
         collect: monitor => ({
             isOver: monitor.isOver()
         })
@@ -67,15 +68,23 @@ const BoardSquare: FC<Props> = (props) => {
             ref={drop}
             style={{
                 borderWidth: determineSquareCss(x, y),
-                bottom: hasPlayer ? '0.5px' : '16.5px',
-                padding: hasPlayer ? '20px' : '0px'
+                bottom: hasItem ? '0.5px' : '16.5px',
+                padding: hasItem ? '20px' : '0px'
             }}
         >
             <Square>{children}</Square>
-            {isOver && !hasPlayer && <div className={classes.droppable} />}
-            {isOver && (hasPlayer || checkIfIsForbiddenPosition(x,y)) && <div className={classes.undroppable} />}
+            {isOver && !hasItem && <div className={classes.droppable} />}
+            {isOver && (hasItem || checkIfIsForbiddenPosition(x,y)) && <div className={classes.undroppable} />}
         </div>
     )
+
+    function handleMove(x: number, y: number, item: any) {
+        if (item.itemType === ItemTypes.PLAYER) {
+            movePlayer(x, y, item.currentPosition as PlayerPosition)
+        } else if (item.itemType === ItemTypes.FOOTBALL) {
+            moveFootball(x, y);
+        }
+    }
 
     function determineSquareCss(x: number, y: number): string {
         // Goal lines

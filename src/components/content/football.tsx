@@ -3,32 +3,27 @@ import { useDrag } from "react-dnd";
 import { Avatar } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import { ItemTypes } from "../../enums/itemTypes";
-import { PlayerPosition } from "../../models/playerPositionData";
+import football from "../../static/football.png";
 
 const useStyles = makeStyles(() =>
     createStyles({
         player: {
             fontWeight: 'bold',
             cursor: 'move',
-            width: '50px!important',
-            height: '50px!important',
+            width: '35px!important',
+            height: '35px!important',
             bottom: '7px',
             left: '15px'
         }
     })
 );
 
-export type Props = {
-    playerIndex: number;
-    playerPosition: PlayerPosition;
-}
-
-const Player: FC<Props> = (props) => {
+const Football: FC = () => {
     const classes = useStyles();
-    const { playerIndex, playerPosition } = props;
+
     const [{ isDragging }, drag] = useDrag(() => ({
         type: ItemTypes.PLAYER,
-        item: { currentPosition: playerPosition, itemType: ItemTypes.PLAYER },
+        item: { itemType: ItemTypes.FOOTBALL },
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         })
@@ -38,10 +33,9 @@ const Player: FC<Props> = (props) => {
         <Avatar
             className={classes.player}
             ref={drag}
-            style={ playerIndex <= 4 ? { backgroundColor: 'black', opacity: isDragging ? 0.5 : 1 } : { opacity: isDragging ? 0.5 : 1}}>
-            {playerIndex}
-        </Avatar>
+            src={football}
+            style={{ opacity: isDragging ? 0.5 : 1}} />
     )
 }
 
-export default Player
+export default Football

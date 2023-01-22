@@ -1,4 +1,5 @@
 import { PlayerPosition } from "../models/playerPositionData";
+import {FootballPosition} from "../models/footballPositionData";
 
 export function checkIfIsForbiddenPosition(x: number, y: number): boolean {
     return (x === 0 && y === 3) || (x === 0 && y === 2) ||
@@ -13,6 +14,10 @@ export function checkIfIsForbiddenPosition(x: number, y: number): boolean {
 
 export function checkIfPlayerIsAlreadyOnPosition(x: number, y: number, playerPositions: PlayerPosition[]): boolean {
     return playerPositions.some(position => position.playerX === x && position.playerY === y);
+}
+
+export function checkIfFootballIsAlreadyOnPosition(x: number, y: number, footballPosition: FootballPosition): boolean {
+    return footballPosition.footballX === x && footballPosition.footballY === y;
 }
 
 export function checkIfLeftHalfOfTheFiledHasBeenFilled(playerPositions: PlayerPosition[]): boolean {

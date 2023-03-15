@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
     createStyles({
         menu: {
             width: '100%',
-            height: '100vh', // TODO Ask Begovic
+            height: '100%', // TODO Ask Begovic
             backgroundColor: Colors.NAV_BLUE,
             color: "white",
             position: "relative",
